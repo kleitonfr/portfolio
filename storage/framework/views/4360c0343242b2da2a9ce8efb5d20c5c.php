@@ -1,8 +1,11 @@
 <section id="hero" class="relative overflow-hidden border-b border-border bg-bg px-6 pb-20 pt-24 md:px-12 md:pb-28 md:pt-24">
-    <div
-        aria-hidden="true"
-        class="pointer-events-none absolute -top-40 left-[-10%] h-[32rem] w-[32rem] rounded-full rule-spectrum opacity-20 blur-[120px]"
-    ></div>
+    
+    <div class="cosmic-bg" aria-hidden="true">
+        <canvas id="starfield" class="cosmic-stars"></canvas>
+        <div class="nebula nebula--violet"></div>
+        <div class="nebula nebula--aqua"></div>
+        <div class="nebula nebula--pink"></div>
+    </div>
 
     <div class="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[0.95fr_1.05fr] md:gap-16">
         <div class="reveal flex items-center justify-center md:order-1" style="animation-delay:.2s">
@@ -14,7 +17,7 @@
             </div>
         </div>
 
-        <div class="text-center md:order-2 md:text-left">
+        <div class="hero-glow-text text-center md:order-2 md:text-left">
             <p class="reveal label-mono">Desenvolvedor full stack</p>
 
             <h1 class="reveal mt-6 max-w-2xl text-4xl font-extrabold leading-[1.02] text-balance text-spectrum md:text-6xl lg:text-7xl">
@@ -55,7 +58,7 @@
 <section class="border-b border-border bg-surface px-6 py-10 md:px-12">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-4 md:justify-start">
         <span class="label-mono text-mutedDim">Stack</span>
-        <?php $__currentLoopData = ['Laravel', 'PHP', 'Python','JavaScript', 'HTML', 'CSS', 'MySQL', 'PostgreSQL', 'SQLite', 'Git', 'GitHub', 'Figma', 'Rest API']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tech): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php $__currentLoopData = ['Laravel', 'NestJS', 'PHP', 'Python','JavaScript', 'TypeScript', 'HTML', 'CSS', 'MySQL', 'PostgreSQL', 'SQLite', 'Git', 'GitHub', 'Figma', 'Rest API']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tech): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <span class="text-sm font-semibold text-muted"><?php echo e($tech); ?></span>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>

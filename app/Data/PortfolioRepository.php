@@ -51,7 +51,7 @@ class PortfolioRepository implements PortfolioRepositoryInterface
             ],
 
             [
-                'period' => '2022 — 2024',
+                'period' => '2023 — 2024',
                 'title' => 'Analista Service Desk — STII',
                 'desc' => 'Liderei o ranking interno de chamados solucionados por três meses consecutivos, atuando em múltiplos grupos: Sistemas, Helpdesk, Segurança de Rede e Embras-Atendimentos.',
                 'direction' => 'left',

@@ -1,8 +1,11 @@
 <section id="hero" class="relative overflow-hidden border-b border-border bg-bg px-6 pb-20 pt-24 md:px-12 md:pb-28 md:pt-24">
-    <div
-        aria-hidden="true"
-        class="pointer-events-none absolute -top-40 left-[-10%] h-[32rem] w-[32rem] rounded-full rule-spectrum opacity-20 blur-[120px]"
-    ></div>
+    {{-- Fundo cósmico: estrelas cintilantes (canvas) + nebulosas (CSS), sutil e contínuo --}}
+    <div class="cosmic-bg" aria-hidden="true">
+        <canvas id="starfield" class="cosmic-stars"></canvas>
+        <div class="nebula nebula--violet"></div>
+        <div class="nebula nebula--aqua"></div>
+        <div class="nebula nebula--pink"></div>
+    </div>
 
     <div class="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[0.95fr_1.05fr] md:gap-16">
         <div class="reveal flex items-center justify-center md:order-1" style="animation-delay:.2s">
@@ -14,7 +17,7 @@
             </div>
         </div>
 
-        <div class="text-center md:order-2 md:text-left">
+        <div class="hero-glow-text text-center md:order-2 md:text-left">
             <p class="reveal label-mono">Desenvolvedor full stack</p>
 
             <h1 class="reveal mt-6 max-w-2xl text-4xl font-extrabold leading-[1.02] text-balance text-spectrum md:text-6xl lg:text-7xl">

@@ -4,6 +4,7 @@
 // ============================================================
 
 import './bootstrap';
+import './starfield';
 
 const botaoMenu = document.getElementById('menuBtn');
 const menuMobile = document.getElementById('mobileMenu');
@@ -45,7 +46,7 @@ const observadorReveal = new IntersectionObserver((entries) => {
 elementosReveal.forEach((el) => observadorReveal.observe(el));
 
 const secoes = document.querySelectorAll('section[id]');
-const linksNav = document.querySelectorAll('nav a[href^="#"]');
+const linksNav = document.querySelectorAll('nav a[href^="#"]:not(.btn-cta)');
 
 const observadorSecoes = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {

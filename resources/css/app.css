@@ -92,6 +92,65 @@
     }
     .btn-sm:hover { border-color: var(--sun); color: var(--sun); }
 
+    /* ── Fundo cósmico do Hero (estrelas + nebulosas) ── */
+    .cosmic-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+    .cosmic-stars {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .nebula {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: .26;
+        animation: nebulaFloat 24s ease-in-out infinite;
+        will-change: transform;
+    }
+    .nebula--violet {
+        top: -12rem; left: -8%;
+        width: 32rem; height: 32rem;
+        background: radial-gradient(circle at 30% 30%, var(--violet), transparent 70%);
+    }
+    .nebula--aqua {
+        bottom: -14rem; right: -6%;
+        width: 28rem; height: 28rem;
+        background: radial-gradient(circle at 60% 40%, var(--aqua), transparent 70%);
+        animation-delay: 8s;
+    }
+    .nebula--pink {
+        top: 32%; left: 42%;
+        width: 22rem; height: 22rem;
+        background: radial-gradient(circle at 50% 50%, var(--pink), transparent 70%);
+        opacity: .16;
+        animation-delay: 16s;
+    }
+    @keyframes nebulaFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33%      { transform: translate(2%, -3%) scale(1.06); }
+        66%      { transform: translate(-3%, 2%) scale(.96); }
+    }
+
+    /* Legibilidade do texto sobre o fundo animado — sombra sutil, sem alterar as cores originais */
+    .hero-glow-text {
+        text-shadow: 0 2px 18px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.5);
+    }
+    /* O gradiente de texto (background-clip) e os botões não devem herdar a sombra:
+       em texto com cor transparente + clip, a sombra "vaza" atrás do gradiente e o suja;
+       em botão com fundo sólido, a sombra no texto fica com aspecto estranho. */
+    .hero-glow-text .text-spectrum,
+    .hero-glow-text .btn-cta,
+    .hero-glow-text .btn-outline {
+        text-shadow: none;
+    }
+
     /* ── Avatar (hero) ── */
     .hero-avatar-wrap { position: relative; width: 220px; height: 220px; flex-shrink: 0; }
     .hero-avatar-ring {
@@ -204,4 +263,5 @@
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    .nebula { animation: none; }
 }
