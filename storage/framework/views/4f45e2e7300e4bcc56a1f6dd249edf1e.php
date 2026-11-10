@@ -28,7 +28,7 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars, $__key, $__value); ?>
 
-<footer class="border-t border-border bg-bg px-6 py-14 md:px-12">
+<footer class="relative z-[1] border-t border-border bg-bg/85 px-6 py-14 md:px-12">
     <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center md:flex-row md:items-end md:justify-between md:text-left">
         <div class="max-w-md">
             <p class="font-display text-lg font-bold text-ink">Kleiton Ferreira</p>
