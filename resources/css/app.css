@@ -7,18 +7,52 @@
    CSS VARIABLES — tema escuro (paleta "spectrum")
    ============================================================ */
 :root {
-    --bg:       #0B0B10;
-    --surface:  #131318;
-    --surface2: #1A1A22;
-    --border:   rgba(242, 241, 236, .08);
-    --ink:      #F2F1EC;
-    --muted:    #8D8DA0;
-    --muted-dim:#5F5F70;
-    --sun:      #FFBE00;
-    --pink:     #FF6B9D;
-    --aqua:     #00D4E8;
-    --violet:   #C084FC;
+    /* Canais RGB — fonte única da paleta (o Tailwind lê estes valores em tailwind.config.js) */
+    --bg-rgb:        11 11 16;
+    --surface-rgb:   19 19 24;
+    --surface2-rgb:  26 26 34;
+    --ink-rgb:       242 241 236;
+    --muted-rgb:     141 141 160;
+    --muted-dim-rgb: 95 95 112;
+    --sun-rgb:       255 190 0;
+    --pink-rgb:      255 107 157;
+    --aqua-rgb:      0 212 232;
+    --violet-rgb:    192 132 252;
+
+    --bg:       rgb(var(--bg-rgb));
+    --surface:  rgb(var(--surface-rgb));
+    --surface2: rgb(var(--surface2-rgb));
+    --border:   rgb(var(--ink-rgb) / .08);
+    --ink:      rgb(var(--ink-rgb));
+    --muted:    rgb(var(--muted-rgb));
+    --muted-dim:rgb(var(--muted-dim-rgb));
+    --sun:      rgb(var(--sun-rgb));
+    --pink:     rgb(var(--pink-rgb));
+    --aqua:     rgb(var(--aqua-rgb));
+    --violet:   rgb(var(--violet-rgb));
     --gradient-spectrum: linear-gradient(120deg, var(--sun) 0%, var(--pink) 38%, var(--violet) 68%, var(--aqua) 100%);
+
+    /* Escala do TEXTO, controlada pela barra de acessibilidade (1 = 100%).
+       Só a tipografia usa estes fatores (ver fontSize em tailwind.config.js): espaçamentos e
+       larguras continuam iguais, então o texto cresce e o layout reflui — não é um zoom.
+       Títulos já são grandes, por isso crescem só 40% do que o corpo cresce. */
+    --escala: 1;
+    --escala-titulo: calc(1 + (var(--escala) - 1) * .4);
+}
+
+/* Alto contraste — ativado pela barra de acessibilidade (classe no <html>) */
+html.alto-contraste {
+    --bg-rgb:        0 0 0;
+    --surface-rgb:   0 0 0;
+    --surface2-rgb:  20 20 20;
+    --ink-rgb:       255 255 255;
+    --muted-rgb:     255 255 255;
+    --muted-dim-rgb: 235 235 235;
+    --sun-rgb:       255 234 0;
+    --pink-rgb:      255 170 205;
+    --aqua-rgb:      0 255 255;
+    --violet-rgb:    225 190 255;
+    --border:        rgb(255 255 255 / .75);
 }
 
 /* ============================================================
@@ -26,7 +60,7 @@
    ============================================================ */
 @layer base {
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--ink); overflow-x: hidden; }
+    body { background: var(--bg); font-size: calc(1rem * var(--escala)); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--ink); overflow-x: hidden; }
     h1, h2, h3, h4 { font-family: 'Syne', sans-serif; letter-spacing: -0.02em; }
     ::selection { background: var(--sun); color: #000; }
     ::-webkit-scrollbar { width: 5px; }
@@ -43,13 +77,13 @@
     /* ── Navbar ── */
     #navbar { transition: box-shadow .35s, border-color .35s; }
     #navbar.is-scrolled { box-shadow: 0 12px 30px rgba(0,0,0,.35); }
-    .nav-link { color: rgba(242,241,236,.62); transition: color .2s ease; }
+    .nav-link { color: rgb(var(--ink-rgb) / .62); transition: color .2s ease; }
     .nav-link:hover, .nav-link.text-sun { color: var(--sun); }
 
     /* ── Vocabulário tipográfico do design ── */
     .label-mono {
         font-family: 'JetBrains Mono', monospace;
-        font-size: .6875rem;
+        font-size: calc(.6875rem * var(--escala));
         font-weight: 600;
         letter-spacing: .22em;
         text-transform: uppercase;
@@ -67,7 +101,7 @@
     .btn-cta {
         display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
         border-radius: 999px; padding: .9rem 1.8rem;
-        font-weight: 700; font-size: .95rem;
+        font-weight: 700; font-size: calc(.95rem * var(--escala));
         background: var(--sun); color: #0B0B10;
         transition: transform .25s ease, box-shadow .25s ease;
     }
@@ -76,17 +110,17 @@
     .btn-outline {
         display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
         border-radius: 999px; padding: .9rem 1.8rem;
-        font-weight: 600; font-size: .95rem;
+        font-weight: 600; font-size: calc(.95rem * var(--escala));
         background: transparent; color: var(--ink);
         border: 1px solid var(--border);
         transition: transform .25s ease, border-color .25s ease;
     }
-    .btn-outline:hover { transform: translateY(-2px); border-color: rgba(242,241,236,.3); }
+    .btn-outline:hover { transform: translateY(-2px); border-color: rgb(var(--ink-rgb) / .3); }
 
     .btn-sm {
         display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
         border-radius: 999px; padding: .55rem 1.1rem;
-        font-weight: 600; font-size: .78rem;
+        font-weight: 600; font-size: calc(.78rem * var(--escala));
         border: 1px solid var(--border); color: var(--ink);
         transition: border-color .25s ease, color .25s ease;
     }
@@ -209,7 +243,7 @@
     .comment-role {
         display: flex; align-items: center; gap: .5rem;
         margin-top: .75rem;
-        font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 700;
+        font-family: 'JetBrains Mono', monospace; font-size: calc(.68rem * var(--escala)); font-weight: 700;
         letter-spacing: .16em; text-transform: uppercase; color: var(--sun);
     }
 
@@ -259,9 +293,412 @@
 }
 
 /* ============================================================
-   RESPONSIVE
+   CONSTELAÇÃO DE STACKS
+   Estrelas = <button> posicionados em % dentro de .ceu; as linhas
+   são desenhadas por resources/js/constelacao.js num <svg>.
    ============================================================ */
+.ceu {
+    position: relative;
+    height: 56rem;
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    background:
+        radial-gradient(1px 1px at 12% 18%, rgb(var(--ink-rgb) / .5) 50%, transparent 51%),
+        radial-gradient(1px 1px at 37% 71%, rgb(var(--ink-rgb) / .35) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 63% 9%, rgb(var(--ink-rgb) / .4) 50%, transparent 51%),
+        radial-gradient(1px 1px at 78% 58%, rgb(var(--ink-rgb) / .45) 50%, transparent 51%),
+        radial-gradient(1px 1px at 91% 33%, rgb(var(--ink-rgb) / .3) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 24% 44%, rgb(var(--ink-rgb) / .3) 50%, transparent 51%),
+        radial-gradient(1px 1px at 52% 92%, rgb(var(--ink-rgb) / .4) 50%, transparent 51%),
+        radial-gradient(60% 50% at 20% 20%, rgb(var(--violet-rgb) / .08), transparent 70%),
+        radial-gradient(50% 50% at 85% 85%, rgb(var(--aqua-rgb) / .07), transparent 70%),
+        var(--bg);
+}
+@media (min-width: 768px) { .ceu { height: 35rem; } }
+
+.ceu-linhas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ceu-linha {
+    stroke: rgb(var(--ink-rgb) / .2);
+    stroke-width: 1;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.1s ease, stroke .25s ease, opacity .25s ease, stroke-width .25s ease;
+}
+.ceu.desenhado .ceu-linha { stroke-dashoffset: 0; }
+/* Ligações entre constelações: no mobile só aparecem quando a estrela está em foco (menos ruído) */
+.ceu-linha.entre-grupos { stroke: rgb(var(--ink-rgb) / .09); opacity: 0; }
+@media (min-width: 768px) { .ceu-linha.entre-grupos { opacity: 1; } }
+.ceu-linha.ativa { stroke: var(--cor, var(--sun)); stroke-width: 1.75; opacity: 1; }
+.ceu.com-foco .ceu-linha:not(.ativa),
+.ceu-linha.apagada { opacity: .25; }
+
+.ceu-grupo {
+    position: absolute;
+    left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%);
+    transform: translate(-50%, 0);
+    white-space: nowrap;
+    color: var(--cor);
+    opacity: .85;
+    transition: opacity .25s ease;
+}
+.ceu-grupo.apagada { opacity: .25; }
+
+.estrela {
+    --tam: 10px;
+    position: absolute;
+    left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%);
+    transform: translate(-50%, -1.25rem);
+    display: flex; flex-direction: column; align-items: center; gap: .4rem;
+    min-width: 2.75rem; min-height: 2.75rem;
+    padding: .75rem .4rem .35rem;
+    border-radius: .75rem;
+    color: var(--muted);
+    font-size: calc(.8125rem * var(--escala)); font-weight: 600; line-height: 1.1; white-space: nowrap;
+    cursor: pointer;
+    transition: color .2s ease, opacity .25s ease;
+}
+@media (min-width: 768px) {
+    .ceu-grupo, .estrela { left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); }
+}
+.estrela-ponto {
+    width: var(--tam); height: var(--tam); border-radius: 50%;
+    background: var(--cor);
+    box-shadow: 0 0 0 4px rgb(var(--ink-rgb) / .04), 0 0 14px 1px var(--cor);
+    transition: transform .25s ease, box-shadow .25s ease;
+    animation: cintilar 4.5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.37s);
+}
+@keyframes cintilar { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+
+.estrela:hover, .estrela:focus-visible, .estrela.ativa, .estrela.vizinha { color: var(--ink); }
+.estrela:hover .estrela-ponto, .estrela:focus-visible .estrela-ponto, .estrela.ativa .estrela-ponto {
+    transform: scale(1.6);
+    box-shadow: 0 0 0 5px rgb(var(--ink-rgb) / .08), 0 0 26px 5px var(--cor);
+    animation: none;
+}
+.estrela.vizinha .estrela-ponto { transform: scale(1.25); animation: none; }
+.estrela[aria-pressed="true"] .estrela-nome { text-decoration: underline; text-decoration-color: var(--cor); text-underline-offset: 4px; }
+.ceu.com-foco .estrela:not(.ativa):not(.vizinha),
+.estrela.apagada { opacity: .3; }
+
+/* Cartão com os detalhes da estrela em foco */
+.ceu-area { display: grid; gap: 1.5rem; }
+.ceu-cartao {
+    position: fixed; z-index: 70;
+    left: 1rem; right: 1rem; bottom: 1rem;
+    max-width: 26rem; margin-inline: auto;
+    padding: 1.1rem 1.25rem 1.2rem;
+    border: 1px solid var(--cor, var(--border));
+    border-radius: 1rem;
+    background: var(--surface2);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+}
+.ceu-cartao[hidden] { display: none; }
+/* Folha fixa (telas menores): não passa de 70% da altura e rola por dentro */
+.ceu-cartao { max-height: 70vh; overflow-y: auto; overscroll-behavior: contain; }
+@media (min-width: 1024px) {
+    .ceu-area { grid-template-columns: minmax(0, 1fr) 21rem; }
+    .ceu-cartao, .ceu-cartao[hidden] {
+        display: block; position: relative; inset: auto; z-index: auto;
+        max-width: none; max-height: 35rem; margin: 0; padding: 1.75rem;
+        border-radius: 1.5rem; box-shadow: none;
+        transition: border-color .25s ease;
+    }
+}
+
+/* Cards dos projetos do portfólio dentro do cartão */
+.ceu-projetos { display: flex; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: .25rem; }
+.ceu-cartao a.ceu-projeto {
+    flex: 0 0 9.5rem; scroll-snap-align: start;
+    display: flex; flex-direction: column; overflow: hidden;
+    border: 1px solid var(--border); border-radius: .75rem;
+    background: var(--surface); text-decoration: none;
+    transition: border-color .2s ease, transform .2s ease;
+}
+.ceu-cartao a.ceu-projeto:hover, .ceu-cartao a.ceu-projeto:focus-visible { border-color: var(--cor); transform: translateY(-2px); }
+.ceu-projeto img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; display: block; }
+.ceu-projeto-titulo { padding: .6rem .7rem .7rem; font-size: calc(.8125rem * var(--escala)); font-weight: 700; line-height: 1.25; color: var(--ink); }
+@media (min-width: 1024px) {
+    .ceu-projetos { display: grid; grid-template-columns: 1fr 1fr; overflow: visible; }
+    .ceu-projetos.um-so { grid-template-columns: 1fr; }
+    .ceu-cartao a.ceu-projeto { flex: none; }
+}
+
+/* Repositórios e publicações fora do portfólio */
+.ceu-links { display: grid; gap: .5rem; }
+.ceu-cartao a.ceu-link {
+    display: grid; gap: .2rem;
+    padding: .7rem .85rem;
+    border: 1px dashed rgb(var(--ink-rgb) / .22); border-radius: .75rem;
+    text-decoration: none;
+    transition: border-color .2s ease;
+}
+.ceu-cartao a.ceu-link:hover, .ceu-cartao a.ceu-link:focus-visible { border-color: var(--cor); border-style: solid; }
+.ceu-link-titulo { font-size: calc(.875rem * var(--escala)); font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+.ceu-link-desc { font-size: calc(.8125rem * var(--escala)); line-height: 1.45; color: var(--muted); }
+
+/* ============================================================
+   TÍTULOS FLUIDOS
+   clamp() faz o tamanho acompanhar a largura da tela sem saltos entre breakpoints.
+   O min(..., Nvw) final é um teto: a Syne 800 é muito larga e, sem ele, uma palavra
+   longa ("profissional") estouraria a coluna em telas estreitas com o texto ampliado.
+   ============================================================ */
+.titulo-hero {
+    font-size: min(calc(clamp(2.25rem, 1rem + 5vw, 4.5rem) * var(--escala-titulo)), 10.5vw);
+    line-height: 1.02;
+}
+.titulo-secao {
+    font-size: min(calc(clamp(1.75rem, 1rem + 3.6vw, 3.75rem) * var(--escala-titulo)), 8vw);
+    line-height: 1.06;
+}
+.titulo-hero, .titulo-secao { overflow-wrap: break-word; }
+.ceu-cartao-fechar {
+    position: absolute; top: .5rem; right: .5rem;
+    width: 2rem; height: 2rem; border-radius: 50%;
+    color: var(--muted); font-size: 1.1rem; line-height: 1;
+}
+.ceu-cartao-fechar:hover { color: var(--ink); }
+.ceu-cartao a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--cor); text-underline-offset: 3px; }
+.ceu-cartao a:hover { color: var(--cor); }
+
+.filtro-ceu {
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: .5rem 1rem;
+    font-size: calc(.8125rem * var(--escala)); font-weight: 600; color: var(--muted);
+    transition: color .2s ease, border-color .2s ease, background-color .2s ease;
+}
+.filtro-ceu:hover { color: var(--ink); border-color: rgb(var(--ink-rgb) / .3); }
+.filtro-ceu[aria-pressed="true"] { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+
+/* ============================================================
+   CARDS DE PROJETO — brilho que acompanha o cursor
+   ============================================================ */
+.card-brilho { position: relative; }
+.card-brilho::after {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: radial-gradient(22rem circle at var(--px, 50%) var(--py, 0%), rgb(var(--ink-rgb) / .07), transparent 60%);
+    opacity: 0; transition: opacity .3s ease;
+}
+.card-brilho:hover::after { opacity: 1; }
+
+/* ============================================================
+   CÉU CONTÍNUO — fundo fixo da página inteira
+   ============================================================ */
+.ceu-global { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.ceu-global .nebula { opacity: .2; }
+.ceu-global .nebula--pink { opacity: .12; }
+/* Luz suave que segue o cursor (posição vem de resources/js/movimento.js) */
+.ceu-luz {
+    position: absolute; inset: 0;
+    background: radial-gradient(26rem circle at var(--luz-x, 50%) var(--luz-y, -20%), rgb(var(--violet-rgb) / .13), transparent 65%);
+}
+
+/* Barra de progresso de leitura, no topo */
+.progresso-leitura {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 90; height: 3px;
+    background: var(--gradient-spectrum);
+    transform: scaleX(var(--progresso, 0)); transform-origin: left;
+    pointer-events: none;
+}
+
+/* ============================================================
+   Y2K CÓSMICO — brilhos, órbitas, adesivo, letreiro, grade
+   Tudo decorativo: some no alto contraste e para com "Pausar animações".
+   ============================================================ */
+
+/* Gradiente "holográfico": o degradê do texto desliza devagar de um lado para o outro */
+.text-spectrum { background-size: 220% 100%; animation: holografico 9s ease-in-out infinite alternate; }
+@keyframes holografico { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+/* Brilho de 4 pontas */
+.brilho { position: absolute; width: 1.25rem; height: 1.25rem; pointer-events: none; animation: piscar 3.2s ease-in-out infinite; }
+@keyframes piscar {
+    0%, 100% { transform: scale(.55) rotate(0deg); opacity: .45; }
+    50%      { transform: scale(1.1) rotate(45deg); opacity: 1; }
+}
+.brilho--titulo-1 { top: -1.1rem; right: -1.4rem; width: 1.75rem; height: 1.75rem; }
+.brilho--titulo-2 { bottom: -.4rem; left: -1.5rem; width: 1rem; height: 1rem; animation-delay: -1.3s; }
+.brilho--avatar-1 { top: 4%; left: -6%; width: 1.5rem; height: 1.5rem; animation-delay: -.7s; }
+.brilho--avatar-2 { bottom: 14%; left: -14%; width: .9rem; height: .9rem; animation-delay: -2.1s; }
+
+/* Órbitas ao redor do avatar, cada uma com um "planeta" */
+.orbita {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    border: 1px dashed rgb(var(--ink-rgb) / .2);
+    animation: orbitar 22s linear infinite;
+}
+.orbita--1 { inset: -34px; }
+.orbita--2 { inset: -62px; border-style: solid; border-color: rgb(var(--ink-rgb) / .1); animation-duration: 36s; animation-direction: reverse; }
+.orbita i {
+    position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; margin-left: -5px;
+    border-radius: 50%; background: var(--sun); box-shadow: 0 0 14px 2px var(--sun);
+}
+.orbita--2 i { top: -4px; width: 7px; height: 7px; margin-left: -3.5px; background: var(--aqua); box-shadow: 0 0 12px 2px var(--aqua); }
+@keyframes orbitar { to { transform: rotate(360deg); } }
+
+/* Adesivo: etiqueta inclinada com contorno e sombra dura */
+.adesivo {
+    position: absolute; right: -1.25rem; bottom: .5rem; z-index: 2;
+    padding: .45rem .8rem; border-radius: 999px;
+    background: var(--sun); color: #0B0B10;
+    border: 2px solid #0B0B10; box-shadow: 3px 3px 0 rgb(var(--ink-rgb) / .9);
+    font-family: 'JetBrains Mono', monospace; font-size: calc(.6875rem * var(--escala)); font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase; white-space: nowrap;
+    transform: rotate(-7deg);
+    animation: flutuar 5s ease-in-out infinite;
+}
+@keyframes flutuar { 0%, 100% { transform: rotate(-7deg) translateY(0); } 50% { transform: rotate(-5deg) translateY(-6px); } }
+
+/* Letreiro de stacks */
+.letreiro {
+    position: relative; z-index: 1; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: rgb(var(--bg-rgb) / .6);
+    padding: 1.1rem 0;
+}
+.letreiro-trilho { display: flex; align-items: center; gap: 1.75rem; width: max-content; animation: marquee 48s linear infinite; }
+.letreiro:hover .letreiro-trilho { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.letreiro-item {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    line-height: 1; text-transform: uppercase; white-space: nowrap;
+    color: transparent; -webkit-text-stroke: 1px rgb(var(--ink-rgb) / .45);
+}
+.letreiro-item--cheio { color: var(--ink); -webkit-text-stroke: 0; }
+.letreiro-brilho { position: static; flex: none; width: 1.1rem; height: 1.1rem; color: var(--sun); }
+
+/* Grade em perspectiva (contato): linhas correndo em direção a quem olha */
+.grade-horizonte {
+    position: absolute; left: -25%; right: -25%; bottom: 0; height: 18rem; pointer-events: none;
+    background-image:
+        linear-gradient(rgb(var(--violet-rgb) / .35) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(var(--violet-rgb) / .35) 1px, transparent 1px);
+    background-size: 3.5rem 3.5rem;
+    transform: perspective(26rem) rotateX(64deg); transform-origin: bottom;
+    -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+            mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+    animation: correr-grade 3.5s linear infinite;
+}
+@keyframes correr-grade { to { background-position: 0 3.5rem, 0 0; } }
+
+/* ============================================================
+   MOTION — títulos, cards e trilha da jornada
+   ============================================================ */
+
+/* Títulos de seção sobem de trás de uma "máscara" ao entrar na tela */
+/* (o recorte só entra junto com .visible: recortar antes esconderia o título do
+   IntersectionObserver que dispara o reveal, e ele nunca apareceria) */
+.titulo-secao.reveal.visible { animation: subir-titulo .9s cubic-bezier(.16,1,.3,1) both; }
+@keyframes subir-titulo {
+    from { clip-path: inset(0 0 100% 0); }
+    to   { clip-path: inset(-20% -5% -20% -5%); }
+}
+
+/* Botão magnético: o deslocamento vem do JS; aqui só a suavização */
+.btn-cta { transition: transform .18s ease-out, box-shadow .25s ease; will-change: transform; }
+
+/* Card de projeto inclinando em 3D conforme o cursor (--rx/--ry vêm do JS) */
+.card-brilho.inclinando {
+    transform: perspective(60rem) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
+    transition: transform .12s ease-out, border-color .3s ease, box-shadow .3s ease;
+}
+
+/* Jornada: trilha vertical que se desenha com a rolagem (--avanco de 0 a 1 vem do JS) */
+.curio-track { position: relative; padding-left: 2rem; --avanco: 0; }
+.curio-track::before, .curio-track::after { content: ''; position: absolute; left: .5rem; top: 0; bottom: 0; width: 2px; border-radius: 2px; }
+.curio-track::before { background: var(--border); }
+.curio-track::after { background: var(--gradient-spectrum); transform: scaleY(var(--avanco)); transform-origin: top; }
+.curio-card { position: relative; }
+/* Nó de cada etapa: acende quando a trilha passa por ele */
+.curio-card::before {
+    content: ''; position: absolute; left: calc(-1.5rem - 5px); top: 2rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid rgb(var(--ink-rgb) / .3);
+    transition: background-color .35s ease, border-color .35s ease, box-shadow .35s ease, transform .35s ease;
+}
+.curio-card.passou::before { background: var(--sun); border-color: var(--sun); box-shadow: 0 0 16px 3px rgb(var(--sun-rgb) / .6); transform: scale(1.15); }
+@media (min-width: 768px) {
+    .curio-track { padding-left: 3rem; }
+    .curio-track::before, .curio-track::after { left: .75rem; }
+    .curio-card::before { left: calc(-2.25rem - 5px); top: 2.75rem; }
+}
+
+/* ============================================================
+   BARRA DE ACESSIBILIDADE
+   ============================================================ */
+.pular-conteudo {
+    position: fixed; left: 1rem; top: -4rem; z-index: 120;
+    padding: .75rem 1.25rem; border-radius: 999px;
+    background: var(--sun); color: #0B0B10; font-weight: 700;
+    transition: top .2s ease;
+}
+.pular-conteudo:focus { top: 1rem; }
+
+.a11y { position: fixed; left: 1rem; bottom: 1rem; z-index: 60; display: flex; flex-direction: column-reverse; align-items: flex-start; gap: .6rem; }
+.a11y-abrir {
+    border-radius: 999px; padding: .7rem 1.15rem;
+    background: var(--surface2); color: var(--ink);
+    border: 1px solid rgb(var(--ink-rgb) / .25);
+    font-size: calc(.8125rem * var(--escala)); font-weight: 700;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+    transition: border-color .2s ease, color .2s ease;
+}
+.a11y-abrir:hover, .a11y-abrir[aria-expanded="true"] { border-color: var(--sun); color: var(--sun); }
+.a11y-painel {
+    width: min(17rem, calc(100vw - 2rem)); padding: 1rem;
+    display: flex; flex-direction: column; gap: .5rem;
+    border: 1px solid rgb(var(--ink-rgb) / .25); border-radius: 1rem;
+    background: var(--surface2);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+}
+.a11y-painel[hidden] { display: none; }
+.a11y-botao {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 2.75rem; padding: .5rem .9rem;
+    border: 1px solid var(--border); border-radius: .75rem;
+    font-size: calc(.875rem * var(--escala)); font-weight: 600; color: var(--ink);
+    transition: border-color .2s ease, color .2s ease, background-color .2s ease;
+}
+.a11y-botao:hover { border-color: var(--sun); color: var(--sun); }
+.a11y-botao[aria-pressed="true"] { background: var(--sun); border-color: var(--sun); color: #0B0B10; }
+.a11y-botao:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ── Ajustes do modo de alto contraste ── */
+html.alto-contraste .text-spectrum { background-image: none; color: var(--sun); }
+html.alto-contraste .nebula,
+html.alto-contraste .cosmic-stars,
+html.alto-contraste .ceu-luz,
+html.alto-contraste .brilho,
+html.alto-contraste .orbita,
+html.alto-contraste .grade-horizonte { display: none; }
+html.alto-contraste .text-spectrum { animation: none; }
+html.alto-contraste .letreiro-item { color: var(--ink); -webkit-text-stroke: 0; }
+html.alto-contraste .adesivo { box-shadow: none; border-color: #000; color: #000; }
+html.alto-contraste main > section, html.alto-contraste footer, html.alto-contraste article, html.alto-contraste .letreiro { background-color: var(--bg); }
+html.alto-contraste .ceu { background: var(--bg); }
+html.alto-contraste .hero-avatar-inner img { filter: none; }
+html.alto-contraste .hero-glow-text { text-shadow: none; }
+html.alto-contraste main a:not(.btn-cta):not(.btn-outline),
+html.alto-contraste footer a { text-decoration: underline; text-underline-offset: 3px; }
+html.alto-contraste .ceu-linha { stroke: rgb(255 255 255 / .6); }
+html.alto-contraste .ceu-linha.entre-grupos { stroke: rgb(255 255 255 / .4); }
+html.alto-contraste .ceu-grupo { opacity: 1; }
+html.alto-contraste .btn-cta, html.alto-contraste .a11y-botao[aria-pressed="true"], html.alto-contraste .pular-conteudo { color: #000; }
+
+/* ============================================================
+   MOVIMENTO REDUZIDO — preferência do sistema ou botão "Pausar animações"
+   ============================================================ */
+html.sem-movimento *, html.sem-movimento *::before, html.sem-movimento *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+/* Animações infinitas precisam ser desligadas de fato (duração mínima as faria piscar) */
+html.sem-movimento :is(.nebula, .estrela-ponto, .text-spectrum, .brilho, .orbita, .adesivo, .letreiro-trilho, .grade-horizonte) { animation: none; }
+html.sem-movimento .titulo-secao.reveal.visible { animation: none; }
+html.sem-movimento .ceu-luz { display: none; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    .nebula { animation: none; }
+    :is(.nebula, .estrela-ponto, .text-spectrum, .brilho, .orbita, .adesivo, .letreiro-trilho, .grade-horizonte) { animation: none; }
+    .titulo-secao.reveal.visible { animation: none; }
+    .ceu-luz { display: none; }
 }
+
+/* VLibras desativado: o contêiner some por completo (o widget usa position: fixed) */
+#vlibrasRaiz[hidden] { display: none !important; }

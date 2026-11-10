@@ -1,6 +1,6 @@
 <x-layouts.app :socialLinks="$socialLinks ?? []" :contact="$contact ?? []" :title="$project['title'] . ' — Kleiton Ferreira'" :description="$project['excerpt'] ?? null">
 
-    <article class="bg-bg px-6 py-20 md:px-12 md:py-28">
+    <article class="bg-bg/70 px-6 py-20 md:px-12 md:py-28">
         <div class="mx-auto max-w-3xl">
 
             <a href="{{ route('home') }}#projetos" wire:navigate class="label-mono transition-colors hover:text-sun">
@@ -11,7 +11,7 @@
                 <p class="label-mono mt-10 text-sun">{{ $project['subtitle'] }}</p>
             @endif
 
-            <h1 class="mt-4 text-4xl font-extrabold text-balance text-ink md:text-6xl">
+            <h1 class="mt-4 titulo-secao font-extrabold text-balance text-ink">
                 {{ $project['title'] }}
             </h1>
 

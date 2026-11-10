@@ -3,6 +3,10 @@
         'linkedin' => $contact['linkedin'] ?? '',
     ]])
 
+    @include('sections.letreiro', ['stacks' => $stacks])
+
+    @include('sections.stack', ['stacks' => $stacks])
+
     @include('sections.depoimentos', ['testimonials' => $testimonials])
 
     @include('sections.projetos')

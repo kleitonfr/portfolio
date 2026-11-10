@@ -2,7 +2,7 @@
     @if(count($projetos))
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($projetos as $project)
-                <x-project-card :project="$project" />
+                <x-project-card :project="$project" :accent="['sun', 'pink', 'aqua', 'violet'][$loop->index % 4]" />
             @endforeach
         </div>
     @else

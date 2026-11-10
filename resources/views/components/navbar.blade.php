@@ -9,6 +9,7 @@
         </a>
 
         <ul class="hidden gap-8 text-sm font-semibold text-white/70 md:flex">
+            <li><a href="{{ $ancora('stack') }}" class="nav-link">Stack</a></li>
             <li><a href="{{ $ancora('depoimentos') }}" class="nav-link">Depoimentos</a></li>
             <li><a href="{{ $ancora('projetos') }}" class="nav-link">Projetos</a></li>
             <li><a href="{{ $ancora('curiosidades') }}" class="nav-link">Curiosidades</a></li>
@@ -25,6 +26,7 @@
 
     <div id="mobileMenu" class="mx-4 mt-4 hidden rounded-2xl border border-white/10 bg-black p-6 shadow-xl md:hidden">
         <ul class="flex flex-col gap-5 font-semibold text-white/70">
+            <li><a href="{{ $ancora('stack') }}" onclick="fecharMenuMobile()" class="block transition-colors hover:text-white">Stack</a></li>
             <li><a href="{{ $ancora('depoimentos') }}" onclick="fecharMenuMobile()" class="block transition-colors hover:text-white">Depoimentos</a></li>
             <li><a href="{{ $ancora('projetos') }}" onclick="fecharMenuMobile()" class="block transition-colors hover:text-white">Projetos</a></li>
             <li><a href="{{ $ancora('curiosidades') }}" onclick="fecharMenuMobile()" class="block transition-colors hover:text-white">Curiosidades</a></li>
