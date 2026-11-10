@@ -1,9 +1,9 @@
-<section id="depoimentos" class="border-b border-border bg-surface px-6 py-24 md:px-12 md:py-32">
+<section id="depoimentos" class="border-b border-border bg-surface/70 px-6 py-24 md:px-12 md:py-32">
     <div class="mx-auto max-w-6xl">
         <div class="reveal">
             <x-section-label index="02">Quem viveu de perto</x-section-label>
         </div>
-        <h2 class="reveal mx-auto mt-6 max-w-3xl break-words text-center text-4xl font-extrabold text-balance text-ink md:mx-0 md:text-left md:text-6xl">
+        <h2 class="reveal mx-auto mt-6 max-w-3xl text-center titulo-secao font-extrabold text-balance text-ink md:mx-0 md:text-left">
             Depoimentos
         </h2>
         <p class="reveal mx-auto mt-5 max-w-2xl text-center text-muted md:mx-0 md:text-left">

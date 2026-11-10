@@ -20,6 +20,7 @@ class PortfolioController extends Controller
             'journey' => $dadosDaPagina['journey'],
             'socialLinks' => $dadosDaPagina['socialLinks'],
             'testimonials' => $dadosDaPagina['testimonials'],
+            'stacks' => $dadosDaPagina['stacks'],
             'contact' => $this->montarContato($dadosDaPagina),
         ]);
     }

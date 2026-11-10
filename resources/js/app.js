@@ -5,6 +5,9 @@
 
 import './bootstrap';
 import './starfield';
+import './acessibilidade';
+import './constelacao';
+import './movimento';
 
 const botaoMenu = document.getElementById('menuBtn');
 const menuMobile = document.getElementById('mobileMenu');

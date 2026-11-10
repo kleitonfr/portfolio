@@ -2,12 +2,12 @@
     $steps = collect($timeline ?? [])->filter(fn ($step) => !empty($step['title']))->values();
 @endphp
 
-<section id="curiosidades" class="border-b border-border bg-bg px-6 py-24 md:px-12 md:py-32">
+<section id="curiosidades" class="border-b border-border bg-bg/60 px-6 py-24 md:px-12 md:py-32">
     <div class="mx-auto max-w-6xl">
         <div class="reveal">
-            <x-section-label index="03">Outras curiosidades</x-section-label>
+            <x-section-label index="04">Outras curiosidades</x-section-label>
         </div>
-        <h2 class="reveal mx-auto mt-6 max-w-3xl text-center text-4xl font-extrabold text-balance text-ink md:mx-0 md:text-left md:text-6xl">
+        <h2 class="reveal mx-auto mt-6 max-w-3xl text-center titulo-secao font-extrabold text-balance text-ink md:mx-0 md:text-left">
             Minha jornada profissional
         </h2>
         <p class="reveal mx-auto mt-5 max-w-xl text-center text-muted md:mx-0 md:text-left">
@@ -26,7 +26,7 @@
                     @if(!empty($step['tags']))
                         <div class="mt-4 flex flex-wrap gap-2 md:col-span-3 md:mt-0 md:justify-end">
                             @foreach($step['tags'] as $tag)
-                                <span class="h-fit rounded-full border border-border px-3 py-1 text-[11px] text-muted">{{ $tag }}</span>
+                                <span class="h-fit rounded-full border border-border px-3 py-1 text-xs text-muted">{{ $tag }}</span>
                             @endforeach
                         </div>
                     @endif

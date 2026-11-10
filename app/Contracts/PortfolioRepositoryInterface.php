@@ -13,4 +13,6 @@ interface PortfolioRepositoryInterface
     public function obterRedesSociais(): array;
 
     public function obterDepoimentos(): array;
+
+    public function obterStacks(): array;
 }
