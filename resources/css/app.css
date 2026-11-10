@@ -297,24 +297,9 @@ html.alto-contraste {
    Estrelas = <button> posicionados em % dentro de .ceu; as linhas
    são desenhadas por resources/js/constelacao.js num <svg>.
    ============================================================ */
-.ceu {
-    position: relative;
-    height: 56rem;
-    border: 1px solid var(--border);
-    border-radius: 1.5rem;
-    background:
-        radial-gradient(1px 1px at 12% 18%, rgb(var(--ink-rgb) / .5) 50%, transparent 51%),
-        radial-gradient(1px 1px at 37% 71%, rgb(var(--ink-rgb) / .35) 50%, transparent 51%),
-        radial-gradient(1.5px 1.5px at 63% 9%, rgb(var(--ink-rgb) / .4) 50%, transparent 51%),
-        radial-gradient(1px 1px at 78% 58%, rgb(var(--ink-rgb) / .45) 50%, transparent 51%),
-        radial-gradient(1px 1px at 91% 33%, rgb(var(--ink-rgb) / .3) 50%, transparent 51%),
-        radial-gradient(1.5px 1.5px at 24% 44%, rgb(var(--ink-rgb) / .3) 50%, transparent 51%),
-        radial-gradient(1px 1px at 52% 92%, rgb(var(--ink-rgb) / .4) 50%, transparent 51%),
-        radial-gradient(60% 50% at 20% 20%, rgb(var(--violet-rgb) / .08), transparent 70%),
-        radial-gradient(50% 50% at 85% 85%, rgb(var(--aqua-rgb) / .07), transparent 70%),
-        var(--bg);
-}
-@media (min-width: 768px) { .ceu { height: 35rem; } }
+.ceu { position: relative; height: 56rem; }
+@media (min-width: 768px) { .ceu { height: 38rem; } }
+@media (min-width: 1280px) { .ceu { height: 42rem; } }
 
 .ceu-linhas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .ceu-linha {
@@ -396,11 +381,12 @@ html.alto-contraste {
 .ceu-cartao[hidden] { display: none; }
 /* Folha fixa (telas menores): não passa de 70% da altura e rola por dentro */
 .ceu-cartao { max-height: 70vh; overflow-y: auto; overscroll-behavior: contain; }
-@media (min-width: 1024px) {
-    .ceu-area { grid-template-columns: minmax(0, 1fr) 21rem; }
+/* Telas grandes: constelação solta à esquerda, painel largo à direita */
+@media (min-width: 1280px) {
+    .ceu-area { grid-template-columns: minmax(0, 1fr) 30rem; gap: 2.5rem; align-items: start; }
     .ceu-cartao, .ceu-cartao[hidden] {
         display: block; position: relative; inset: auto; z-index: auto;
-        max-width: none; max-height: 35rem; margin: 0; padding: 1.75rem;
+        max-width: none; max-height: 42rem; margin: 0; padding: 2.25rem;
         border-radius: 1.5rem; box-shadow: none;
         transition: border-color .25s ease;
     }
@@ -418,7 +404,14 @@ html.alto-contraste {
 .ceu-cartao a.ceu-projeto:hover, .ceu-cartao a.ceu-projeto:focus-visible { border-color: var(--cor); transform: translateY(-2px); }
 .ceu-projeto img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; display: block; }
 .ceu-projeto-titulo { padding: .6rem .7rem .7rem; font-size: calc(.8125rem * var(--escala)); font-weight: 700; line-height: 1.25; color: var(--ink); }
-@media (min-width: 1024px) {
+.ceu-projeto-sub { display: none; padding: 0 .9rem .9rem; margin-top: -.35rem; font-size: calc(.75rem * var(--escala)); line-height: 1.4; color: var(--muted); }
+@media (min-width: 1280px) {
+    .ceu-projeto-titulo { padding: .8rem .9rem .8rem; font-size: calc(.9375rem * var(--escala)); }
+    .ceu-projeto-sub { display: block; }
+    .ceu-links { grid-template-columns: 1fr 1fr; }
+    .ceu-links > :only-child { grid-column: 1 / -1; }
+}
+@media (min-width: 1280px) {
     .ceu-projetos { display: grid; grid-template-columns: 1fr 1fr; overflow: visible; }
     .ceu-projetos.um-so { grid-template-columns: 1fr; }
     .ceu-cartao a.ceu-projeto { flex: none; }
@@ -460,6 +453,30 @@ html.alto-contraste {
 .ceu-cartao-fechar:hover { color: var(--ink); }
 .ceu-cartao a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--cor); text-underline-offset: 3px; }
 .ceu-cartao a:hover { color: var(--cor); }
+
+/* Botões "Conecta com" e atalhos do estado vazio */
+.ceu-vizinhas { display: flex; flex-wrap: wrap; gap: .5rem; }
+.ceu-vizinha {
+    display: inline-flex; align-items: center; gap: .5rem;
+    min-height: 2.25rem; padding: .35rem .85rem;
+    border: 1px solid var(--border); border-radius: 999px;
+    font-size: calc(.8125rem * var(--escala)); font-weight: 600; color: var(--ink);
+    transition: border-color .2s ease, color .2s ease;
+}
+.ceu-vizinha::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: var(--cor); }
+.ceu-vizinha:hover, .ceu-vizinha:focus-visible { border-color: var(--cor); }
+
+.ceu-atalhos { display: grid; gap: .5rem; }
+.ceu-atalho {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem;
+    min-height: 3rem; padding: .6rem .95rem; text-align: left;
+    border: 1px solid var(--border); border-radius: .75rem;
+    transition: border-color .2s ease, transform .2s ease;
+}
+.ceu-atalho:hover, .ceu-atalho:focus-visible { border-color: var(--cor); transform: translateX(3px); }
+.ceu-atalho-ponto { width: .65rem; height: .65rem; border-radius: 50%; background: var(--cor); box-shadow: 0 0 12px 1px var(--cor); }
+.ceu-atalho-nome { font-size: calc(.9375rem * var(--escala)); font-weight: 700; color: var(--ink); }
+.ceu-atalho-total { font-family: 'JetBrains Mono', monospace; font-size: calc(.6875rem * var(--escala)); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 
 .filtro-ceu {
     border: 1px solid var(--border); border-radius: 999px;
@@ -675,7 +692,6 @@ html.alto-contraste .text-spectrum { animation: none; }
 html.alto-contraste .letreiro-item { color: var(--ink); -webkit-text-stroke: 0; }
 html.alto-contraste .adesivo { box-shadow: none; border-color: #000; color: #000; }
 html.alto-contraste main > section, html.alto-contraste footer, html.alto-contraste article, html.alto-contraste .letreiro { background-color: var(--bg); }
-html.alto-contraste .ceu { background: var(--bg); }
 html.alto-contraste .hero-avatar-inner img { filter: none; }
 html.alto-contraste .hero-glow-text { text-shadow: none; }
 html.alto-contraste main a:not(.btn-cta):not(.btn-outline),

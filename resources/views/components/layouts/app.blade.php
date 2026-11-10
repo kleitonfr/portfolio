@@ -19,10 +19,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{{ $description ?? 'Portfólio de Kleiton Ferreira — Desenvolvedor Full Stack & Designer. Soluções digitais com impacto real para o setor público.' }}" />
     <meta name="keywords" content="Kleiton Ferreira, desenvolvedor, full stack, Laravel, PHP, LGPD, Caraguatatuba, portfólio, UX, design" />
-    <meta property="og:title" content="{{ $title ?? 'Kleiton Ferreira — Dev Full Stack & Designer' }}" />
+    <meta property="og:title" content="{{ $title ?? 'Kleiton Ferreira — Dev Full Stack' }}" />
     <meta property="og:description" content="Transformando problemas reais em soluções digitais." />
     <meta name="theme-color" content="#0B0B10" />
-    <title>{{ $title ?? 'Kleiton Ferreira — Dev Full Stack & Designer' }}</title>
+    <title>{{ $title ?? 'Kleiton Ferreira — Dev Full Stack' }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

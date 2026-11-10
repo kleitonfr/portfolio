@@ -46,7 +46,7 @@ unset($__defined_vars, $__key, $__value); ?>
 
 <a
     href="<?php echo e(route('projects.show', ['slug' => $project['slug']])); ?>"
-    class="group reveal flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors <?php echo e($accentBorder); ?>"
+    class="group reveal card-brilho flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors <?php echo e($accentBorder); ?>"
 >
     <div class="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-surface2 to-bg">
         <!--[if BLOCK]><![endif]--><?php if(!empty($project['image'])): ?>

@@ -73,10 +73,20 @@ function iniciarConstelacao() {
         cartao.querySelector('[data-ceu-nome]').textContent = estrela.nome;
         cartao.querySelector('[data-ceu-desc]').textContent = estrela.desc;
 
-        const nomesVizinhas = vizinhasDe(estrela.id).map((id) => porId.get(id).nome);
+        // Vizinhas como botões: clicar leva direto para aquela estrela
+        const vizinhas = vizinhasDe(estrela.id);
         const ligacoesEl = cartao.querySelector('[data-ceu-ligacoes]');
-        ligacoesEl.textContent = nomesVizinhas.length ? `Conecta com: ${nomesVizinhas.join(', ')}.` : '';
-        ligacoesEl.hidden = !nomesVizinhas.length;
+        ligacoesEl.replaceChildren(...vizinhas.map((id) => {
+            const vizinha = porId.get(id);
+            const botao = document.createElement('button');
+            botao.type = 'button';
+            botao.className = 'ceu-vizinha';
+            botao.dataset.ceuIr = id;
+            botao.style.setProperty('--cor', `var(--${dados.grupos[vizinha.grupo].cor})`);
+            botao.textContent = vizinha.nome;
+            return botao;
+        }));
+        cartao.querySelector('[data-ceu-bloco-ligacoes]').hidden = !vizinhas.length;
 
         // Projetos do portfólio: card clicável com a capa
         const projetosEl = cartao.querySelector('[data-ceu-projetos]');
@@ -95,6 +105,12 @@ function iniciarConstelacao() {
             titulo.className = 'ceu-projeto-titulo';
             titulo.textContent = projeto.titulo;
             card.append(titulo);
+            if (projeto.subtitulo) {
+                const subtitulo = document.createElement('span');
+                subtitulo.className = 'ceu-projeto-sub';
+                subtitulo.textContent = projeto.subtitulo;
+                card.append(subtitulo);
+            }
             return card;
         }));
         projetosEl.classList.toggle('um-so', estrela.projetos.length === 1);
@@ -179,6 +195,16 @@ function iniciarConstelacao() {
 
     filtros.forEach((botao) => botao.addEventListener('click', () => aplicarFiltro(botao.dataset.filtroCeu)));
     cartao.querySelector('[data-ceu-fechar]')?.addEventListener('click', () => fixar(null));
+
+    // Atalhos do painel (estado vazio) e botões "Conecta com": fixam a estrela indicada.
+    // Se ela estiver apagada pelo filtro, o filtro volta para "Todas".
+    cartao.addEventListener('click', (evento) => {
+        const alvo = evento.target.closest('[data-ceu-ir]');
+        if (!alvo || !porId.has(alvo.dataset.ceuIr)) return;
+        const id = alvo.dataset.ceuIr;
+        if (filtro && porId.get(id).grupo !== filtro) aplicarFiltro('');
+        fixar(id);
+    });
     ceu.addEventListener('click', (evento) => { if (evento.target === ceu || evento.target === svg) fixar(null); });
     document.addEventListener('keydown', (evento) => { if (evento.key === 'Escape' && fixada) fixar(null); });
 

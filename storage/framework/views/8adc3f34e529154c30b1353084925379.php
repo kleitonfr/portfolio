@@ -2,19 +2,19 @@
     $steps = collect($timeline ?? [])->filter(fn ($step) => !empty($step['title']))->values();
 ?>
 
-<section id="curiosidades" class="border-b border-border bg-bg px-6 py-24 md:px-12 md:py-32">
+<section id="curiosidades" class="border-b border-border bg-bg/60 px-6 py-24 md:px-12 md:py-32">
     <div class="mx-auto max-w-6xl">
         <div class="reveal">
             <?php if (isset($component)) { $__componentOriginal1289ed7a7566caee9d9374ccbe752a3b = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal1289ed7a7566caee9d9374ccbe752a3b = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.section-label','data' => ['index' => '03']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.section-label','data' => ['index' => '04']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('section-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['index' => '03']); ?>Outras curiosidades <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['index' => '04']); ?>Outras curiosidades <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal1289ed7a7566caee9d9374ccbe752a3b)): ?>
 <?php $attributes = $__attributesOriginal1289ed7a7566caee9d9374ccbe752a3b; ?>
@@ -25,7 +25,7 @@
 <?php unset($__componentOriginal1289ed7a7566caee9d9374ccbe752a3b); ?>
 <?php endif; ?>
         </div>
-        <h2 class="reveal mx-auto mt-6 max-w-3xl text-center text-4xl font-extrabold text-balance text-ink md:mx-0 md:text-left md:text-6xl">
+        <h2 class="reveal mx-auto mt-6 max-w-3xl text-center titulo-secao font-extrabold text-balance text-ink md:mx-0 md:text-left">
             Minha jornada profissional
         </h2>
         <p class="reveal mx-auto mt-5 max-w-xl text-center text-muted md:mx-0 md:text-left">
@@ -44,7 +44,7 @@
                     <?php if(!empty($step['tags'])): ?>
                         <div class="mt-4 flex flex-wrap gap-2 md:col-span-3 md:mt-0 md:justify-end">
                             <?php $__currentLoopData = $step['tags']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <span class="h-fit rounded-full border border-border px-3 py-1 text-[11px] text-muted"><?php echo e($tag); ?></span>
+                                <span class="h-fit rounded-full border border-border px-3 py-1 text-xs text-muted"><?php echo e($tag); ?></span>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     <?php endif; ?>

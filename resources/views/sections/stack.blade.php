@@ -27,7 +27,11 @@
             @endforeach
         </div>
 
-        <div class="ceu-area mt-8">
+    </div>
+
+    {{-- A constelação fica solta sobre o fundo da seção (sem moldura) e ocupa uma faixa mais larga
+         que o texto acima; o painel de detalhes vai ao lado, em telas grandes. --}}
+    <div class="ceu-area mx-auto mt-10 max-w-[92rem]">
         <div class="ceu reveal" data-ceu>
             <svg class="ceu-linhas" aria-hidden="true" focusable="false"></svg>
 
@@ -65,18 +69,40 @@
             <div id="ceuCartao" class="ceu-cartao" role="status" aria-live="polite" hidden>
                 <div data-ceu-vazio>
                     <p class="label-mono">{{ count($stacks['estrelas']) }} tecnologias &middot; {{ count($stacks['grupos']) }} constelações</p>
-                    <p class="mt-3 font-display text-lg font-bold text-ink">Escolha uma estrela</p>
-                    <p class="mt-2 text-sm leading-relaxed text-muted">
+                    <p class="mt-3 font-display text-2xl font-bold text-ink">Escolha uma estrela</p>
+                    <p class="mt-3 text-sm leading-relaxed text-muted">
                         As linhas mostram o que costuma trabalhar junto. Estrelas maiores têm mais projetos,
                         repositórios ou publicações para você abrir.
                     </p>
+
+                    {{-- Atalhos: as estrelas com mais evidências, para quem não quer procurar no céu --}}
+                    @php
+                        $destaques = collect($stacks['estrelas'])
+                            ->sortByDesc(fn ($e) => count($e['projetos']) + count($e['links']))
+                            ->take(4);
+                    @endphp
+                    <p class="label-mono mt-7">Comece por aqui</p>
+                    <div class="ceu-atalhos mt-3">
+                        @foreach ($destaques as $destaque)
+                            @php $total = count($destaque['projetos']) + count($destaque['links']); @endphp
+                            <button type="button" class="ceu-atalho" data-ceu-ir="{{ $destaque['id'] }}" style="--cor:var(--{{ $stacks['grupos'][$destaque['grupo']]['cor'] }})">
+                                <span class="ceu-atalho-ponto" aria-hidden="true"></span>
+                                <span class="ceu-atalho-nome">{{ $destaque['nome'] }}</span>
+                                <span class="ceu-atalho-total">{{ $total }} {{ $total === 1 ? 'item' : 'itens' }}</span>
+                            </button>
+                        @endforeach
+                    </div>
                 </div>
                 <div data-ceu-detalhe hidden>
                     <button type="button" class="ceu-cartao-fechar" data-ceu-fechar aria-label="Fechar detalhes">&times;</button>
                     <p class="label-mono" data-ceu-grupo></p>
-                    <p class="mt-2 font-display text-lg font-bold text-ink" data-ceu-nome></p>
+                    <p class="mt-2 font-display text-2xl font-bold text-ink" data-ceu-nome></p>
                     <p class="mt-2 text-sm leading-relaxed text-muted" data-ceu-desc></p>
-                    <p class="mt-3 text-sm leading-relaxed text-muted" data-ceu-ligacoes></p>
+
+                    <div data-ceu-bloco-ligacoes hidden>
+                        <p class="label-mono mt-5">Conecta com</p>
+                        <div class="ceu-vizinhas mt-3" data-ceu-ligacoes></div>
+                    </div>
 
                     <div data-ceu-bloco-projetos hidden>
                         <p class="label-mono mt-5">No portfólio</p>
@@ -90,7 +116,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <script type="application/json" data-ceu-dados>
         {!! json_encode([
