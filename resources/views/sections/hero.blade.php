@@ -17,7 +17,7 @@
         </div>
 
         <div class="hero-glow-text text-center md:order-2 md:text-left">
-            <p class="reveal label-mono">Desenvolvedor full stack</p>
+            <p class="reveal label-mono">Desenvolvedor Full Stack · Interesse em Dados e IA</p>
 
             <div class="relative mt-6 inline-block">
                 <h1 class="reveal max-w-2xl titulo-hero font-extrabold text-balance text-spectrum">
@@ -28,8 +28,7 @@
             </div>
 
             <p class="reveal mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg" style="animation-delay:.05s">
-                Comecei resolvendo problemas de pessoas. Hoje desenvolvo sistemas para elas, com impacto direto
-                na vida de cidadãos e no funcionamento de instituições públicas.
+                Atuo no desenvolvimento de aplicações e sistemas, trabalhando com APIs e bancos de dados para resolver problemas reais. Também venho aprofundando meus estudos em análise de dados, Engenharia de Dados e Inteligência Artificial, buscando ampliar minha capacidade de transformar dados em informações úteis e soluções melhores.
             </p>
 
             <div class="reveal mt-9 flex flex-wrap justify-center gap-3 md:justify-start" style="animation-delay:.1s">
