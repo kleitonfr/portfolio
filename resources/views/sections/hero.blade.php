@@ -28,7 +28,7 @@
             </div>
 
             <p class="reveal mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg" style="animation-delay:.05s">
-                Atuo no desenvolvimento de aplicações e sistemas, trabalhando com APIs e bancos de dados para resolver problemas reais. Também venho aprofundando meus estudos em análise de dados, Engenharia de Dados e Inteligência Artificial, buscando ampliar minha capacidade de transformar dados em informações úteis e soluções melhores.
+                Desenvolvo aplicações e APIs para resolver problemas reais. Atualmente, aprofundo meus conhecimentos em análise de dados, Engenharia de Dados e Inteligência Artificial.
             </p>
 
             <div class="reveal mt-9 flex flex-wrap justify-center gap-3 md:justify-start" style="animation-delay:.1s">
