@@ -17,10 +17,10 @@
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{{ $description ?? 'Portfólio de Kleiton Ferreira — Desenvolvedor Full Stack & Designer. Soluções digitais com impacto real para o setor público.' }}" />
+    <meta name="description" content="{{ $description ?? 'Portfólio de Kleiton Ferreira — Desenvolvedor Full Stack com interesse em dados, análise de dados e inteligência artificial.' }}" />
     <meta name="keywords" content="Kleiton Ferreira, desenvolvedor, full stack, Laravel, PHP, LGPD, Caraguatatuba, portfólio, UX, design" />
-    <meta property="og:title" content="{{ $title ?? 'Kleiton Ferreira — Dev Full Stack' }}" />
-    <meta property="og:description" content="Transformando problemas reais em soluções digitais." />
+    <meta property="og:title" content="{{ $title ?? 'Kleiton Ferreira — Desenvolvedor Full Stack | Dados e IA' }}" />
+    <meta property="og:description" content="Desenvolvimento de software, dados e tecnologia aplicada a problemas reais." />
     <meta name="theme-color" content="#0B0B10" />
     <title>{{ $title ?? 'Kleiton Ferreira — Dev Full Stack' }}</title>
 
